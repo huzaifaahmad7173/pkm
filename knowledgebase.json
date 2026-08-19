@@ -1,0 +1,84 @@
+{
+  "name": "knowledgebase",
+  "description": "Project knowledge base containing documentation for the ai, api, backend, database, frontend, and knowledge domains.",
+  "version": "1.0.0",
+  "root": {
+    "agents_guide": "AGENTS.md"
+  },
+  "folders": [
+    {
+      "name": "ai",
+      "description": "Guidelines for AI/LLM features: configuration, model selection, versioning, error handling, evaluation, and monitoring.",
+      "agents_guide": "ai/AGENTS.md",
+      "documents": [
+        "ai/llm-configuration.md",
+        "ai/model-notes.md",
+        "ai/versioning.md",
+        "ai/error-handling.md",
+        "ai/evaluation.md",
+        "ai/llm-monitoring.md"
+      ]
+    },
+    {
+      "name": "api",
+      "description": "Backend API rules: overview, design standards, endpoints, request/response format, versioning, and performance.",
+      "agents_guide": "api/AGENTS.md",
+      "documents": [
+        "api/api-overview.md",
+        "api/design-standards.md",
+        "api/endpoint-catalog.md",
+        "api/request-response.md",
+        "api/versioning.md",
+        "api/performance.md",
+        "api/technologies.md"
+      ]
+    },
+    {
+      "name": "backend",
+      "description": "Backend architecture and operations: Python stack, service patterns, security, authentication, and deployment.",
+      "agents_guide": "backend/AGENTS.md",
+      "documents": [
+        "backend/technologies.md",
+        "backend/service-patterns.md",
+        "backend/security.md",
+        "backend/authentication.md",
+        "backend/deployment.md"
+      ]
+    },
+    {
+      "name": "database",
+      "description": "Database rules for SQLite: schema conventions, query patterns, migrations, and backup/restore.",
+      "agents_guide": "database/AGENTS.md",
+      "documents": [
+        "database/technology.md",
+        "database/schema-conventions.md",
+        "database/query-patterns.md",
+        "database/migrations.md",
+        "database/backup-restore.md"
+      ]
+    },
+    {
+      "name": "frontend",
+      "description": "Frontend guidelines: Vue/Nuxt/Bootstrap stack, project structure, component conventions, state management, styling, and data fetching.",
+      "agents_guide": "frontend/AGENTS.md",
+      "documents": [
+        "frontend/frontend-technologies.md",
+        "frontend/structure.md",
+        "frontend/conventions.md",
+        "frontend/state-management.md",
+        "frontend/styling.md",
+        "frontend/data-fetching.md"
+      ]
+    },
+    {
+      "name": "knowledge",
+      "description": "Documentation practices: how-to guides, glossary, and troubleshooting templates.",
+      "agents_guide": "knowledge/AGENTS.md",
+      "documents": [
+        "knowledge/how-to-guides.md",
+        "knowledge/glossary.md",
+        "knowledge/troubleshooting.md"
+      ]
+    }
+  ]
+}
