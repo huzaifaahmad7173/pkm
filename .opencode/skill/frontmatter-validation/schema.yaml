@@ -1,0 +1,62 @@
+scope:
+  directories:
+    - Knowledge/
+  file_pattern: "*.md"
+  exclude:
+    - "*/AGENTS.md"
+
+required_fields:
+  - title
+  - description
+
+optional_fields:
+  - tags
+  - status
+  - related
+
+fields:
+
+  title:
+    type: string
+    required: true
+    rules:
+      - non-empty
+      - title-case
+
+  description:
+    type: string
+    required: true
+    rules:
+      - non-empty
+      - ends-with: "."
+
+  tags:
+    type: list
+    required: false
+    rules:
+      - min-items: 1
+      - each: "/^[a-z0-9]+(-[a-z0-9]+)*$/"
+
+  status:
+    type: string
+    required: false
+    allowed_values:
+      - Draft
+      - active
+      - fleeting
+      - seed
+      - planning
+
+  related:
+    type: list
+    required: false
+    rules:
+      - each: bare-filename
+    constraints:
+      bare-filename:
+        extension: ".md"
+        disallow:
+          - "/"
+          - "\\"
+          - ".."
+          - leading-dot

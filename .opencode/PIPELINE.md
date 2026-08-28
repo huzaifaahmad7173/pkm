@@ -58,6 +58,38 @@ These rules exist so drafts and verdicts are grounded in the vault, never in mem
    - Cycle count ≥ 10 in a stage → present the current draft to the user for a final decision.
 6. **Finalize** — Write approved drafts to their destination (default: `Projects/` for epics, nested subtasks under the epic's file). Confirm with the user before final writing if location was not pre-agreed.
 
+## Audit mode (existing knowledge docs)
+
+Audits verify the vault's **existing** documentation in `Knowledge/` (all 6 domains) — not drafts produced by this pipeline. All non-negotiable rules above still apply: every fix is delegated to `general-task`, reviews are fresh each cycle, max 10 cycles per pass, and reviewer conflict / issue recurrence / adjudication escalates to the user via AskQuestion.
+
+### What is verified
+
+Per document:
+
+1. **Link/citation integrity** — every `related:` frontmatter entry and every referenced file path exists and matches its actual target.
+2. **Frontmatter conventions** — `title`, `description`, `tags`, `status` present and consistent with `Knowledge/knowledge/AGENTS.md`.
+3. **Domain guide consistency** — the doc does not contradict its domain's `Knowledge/<domain>/AGENTS.md`.
+4. **Cross-doc consistency** — no contradictions between docs within or across domains.
+
+### Audit cycle flow
+
+1. **Scope** — confirm the domain(s)/files in scope with the user (default: all of `Knowledge/`).
+2. **Review** — launch `@kb-editor`, `@kb-tech-lead`, and `@kb-architect` in parallel. Each reads the actual files (Read/Glob/Grep) and returns APPROVE or CHANGES REQUIRED with findings cited as `path:line`.
+3. **Decide**
+   - All APPROVE → audit passed for that scope.
+   - Any CHANGES REQUIRED → if conflict/recurrence/adjudication present → AskQuestion; otherwise launch `general-task` with the findings to apply fixes → increment cycle → re-review.
+   - Cycle count ≥ 10 → report remaining findings to the user for a final decision.
+4. **Report** — summarize verified items and fixed defects to the user. Nothing is rewritten silently.
+
+### Audit rules
+
+- Every finding must cite `path:line`; an uncited finding is invalid.
+- Reviewers read files before judging; a verdict that references no files is invalid.
+- Fixes change only what findings justify; unrelated content stays untouched.
+- Existing docs are never edited directly by the orchestrator — only via `general-task`.
+
+---
+
 ## Verdict format
 
 Reviewers return `APPROVE` or `CHANGES REQUIRED` plus a numbered list of findings, each referencing section/line and the exact change. Findings on citations must name the correct `path:line` to use.

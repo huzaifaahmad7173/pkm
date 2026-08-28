@@ -1,3 +1,16 @@
+---
+title: Authentication
+description: How users prove who they are, and how the server keeps them signed in.
+tags:
+  - backend
+  - authentication
+  - security
+status: active
+related:
+  - security.md
+  - technologies.md
+---
+
 # Authentication
 
 How users prove who they are, and how the server keeps them signed in.

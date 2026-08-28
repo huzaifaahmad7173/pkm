@@ -14,6 +14,10 @@ The rules in short:
 4. Finalize only when all three reviewers approve, or the user decides after max cycles.
 5. **Grounding (anti-hallucination):** drafts must cite every claim (`path:line`), writers and reviewers must read actual vault files before drafting/judging, and no one may approve content that is not verifiable from the vault. Assumptions are labeled, never stated as fact.
 
+## Knowledge audit pipeline
+
+Verification of existing `Knowledge/` docs runs through the **audit mode** in `.opencode/PIPELINE.md`. The same three reviewers check each doc for: link/citation integrity, frontmatter conventions, consistency with its domain `AGENTS.md`, and cross-doc contradictions. Fixes are delegated to `general-task`; max 10 cycles; escalate to the user on conflict, recurrence, or adjudication. Confirm scope with the user before starting an audit.
+
 ## Agents
 
 - `@kb-editor` — editorial review (clarity, structure, consistency).
