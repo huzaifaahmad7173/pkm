@@ -25,7 +25,7 @@ Validates the YAML frontmatter of Markdown files against the project's canonical
 
 Reference: `schema.yaml` in this skill directory.
 
-For a human-readable quick reference with writing tips and examples, see [`references/frontmatter-guide.md`](references/frontmatter-guide.md).
+For a human-readable quick reference with writing tips and examples, see [`references/frontmatter-guide.md`](references/frontmatter-guide.md). For troubleshooting validation failures, see [`references/common-errors.md`](references/common-errors.md).
 
 Read the YAML file for the full field definitions, types, and allowed values. The schema defines:
 

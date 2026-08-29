@@ -1,13 +1,10 @@
 ---
 title: API Overview
-description: Basic overview of how the backend API is organized and how clients communicate with it.
+description: TODO: Add description.
 tags:
-  - backend
   - api
+  - api-overview
 status: Draft
-related:
-  - authentication.md
-  - technologies.md
 ---
 
 # API Overview
