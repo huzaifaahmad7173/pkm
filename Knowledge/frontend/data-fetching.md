@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Data Fetching
 description: Guidelines for fetching data from APIs, handling loading and errors, caching responses, and implementing common request patterns.
@@ -123,4 +122,3 @@ Following consistent request patterns makes API interactions predictable and eas
 - Cache responses to improve performance.
 - Use pagination for large datasets.
 - Follow consistent request patterns throughout the application.
-```

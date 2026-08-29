@@ -20,7 +20,6 @@ Validates the YAML frontmatter of Markdown files against the project's canonical
 - Domain `AGENTS.md` files (no frontmatter by convention).
 - Files under `.opencode/` (config, not content).
 - Files under `Templates/` (use different schema, not content docs).
-- Files with no YAML frontmatter block — report `INVALID: no frontmatter block found` and stop. Do not attempt to fix or suggest content.
 
 ## Schema
 
@@ -41,16 +40,31 @@ Any field name not in `required_fields` or `optional_fields` is an error.
 
 1. **Run the validation script.** Execute:
    ```
-   python3 .opencode/skill/frontmatter-validation/scripts/validate_frontmatter.py
+   python3 .opencode/skills/frontmatter-validation/scripts/validate_frontmatter.py
    ```
    The script reads `schema.yaml`, scans all `*.md` files in the repo (excluding `AGENTS.md` and `.opencode/`), and outputs `VALID` or `INVALID` with numbered findings per file.
 
-2. **Return the output.** Use the script's output as the verdict. No manual parsing needed.
+2. **Review the output.** The script prints per-file results and a summary line.
 
-3. **If fixing invalid files**, consult [`references/frontmatter-guide.md`](references/frontmatter-guide.md) for:
-   - The quick-reference snippet to copy-paste
-   - Writing tips for titles, descriptions, and tags
-   - Valid vs. invalid examples
+3. **Ask the user before fixing.** If any invalid files are found, **you must ask the user** using the Question tool before running fixes. Example prompt:
+   > "Found N invalid file(s). Would you like me to fix them?"
+   >
+   > Options: "Yes, fix all" / "Yes, but let me choose which files" / "No, just report"
+
+   Only proceed with fixes after the user confirms.
+
+4. **Run fixes with user input.** Pipe the user's choice into the script:
+   ```
+   echo -e "y\nall" | python3 .opencode/skills/frontmatter-validation/scripts/validate_frontmatter.py
+   ```
+   Use `all` to fix everything, or comma-separated file numbers (e.g., `1,3`) for specific files.
+
+5. **Auto-fix behavior.** The script applies fixes based on the issue type:
+   - **No frontmatter block:** Inserts a frontmatter block derived from file content (title from H1 heading, description from first paragraph, tags from domain + filename, status defaults to `Draft`)
+   - **Frontmatter in code block:** Strips the `` ``` `` markers around the frontmatter
+   - **Missing required fields:** Adds fields with values derived from content
+
+6. **Manual review.** After auto-fix, review the files for correctness. Descriptions are extracted from content but may need refinement. Files with `TODO` placeholders require manual completion.
 
 ## Output Format
 
@@ -69,6 +83,57 @@ INVALID — <file-path>
 ```
 
 Number each finding. Use the tag in brackets: `[MISSING]`, `[UNEXPECTED]`, `[INVALID VALUE]`.
+
+## Auto-Fix Behavior
+
+The script can automatically fix certain types of frontmatter issues. When invoked, it asks the user before making any changes.
+
+**Fixable issues:**
+
+| Issue | Fix Action |
+|-------|-----------|
+| No frontmatter block | Inserts frontmatter derived from file content |
+| Frontmatter in code block | Strips `` ``` `` markers |
+| Missing `description` | Extracts from first paragraph after H1 heading |
+| Missing `tags` | Generates from domain folder + filename |
+| Missing `status` | Defaults to `Draft` |
+
+**Content extraction rules:**
+
+- **Title**: Taken from first `# Heading` in the file
+- **Description**: First non-empty, non-heading line after the H1
+- **Tags**: Domain folder name (e.g., `backend`) + filename stem (e.g., `deployment`)
+- **Status**: Defaults to `Draft`
+
+**Example — `backend/deployment.md` before fix:**
+```markdown
+# Deployment
+
+How the backend gets built, released, and monitored.
+
+## Environments
+...
+```
+
+**After fix:**
+```yaml
+---
+title: Deployment
+description: How the backend gets built, released, and monitored.
+tags:
+  - backend
+  - deployment
+status: Draft
+---
+```
+
+**Limitations:**
+
+- Only works on `.md` files in `Knowledge/`
+- Cannot fix invalid field values (e.g., wrong Title Case) — only missing fields
+- Files with no H1 heading get `title: TODO: Add Title`
+- Files with no description paragraph get `description: TODO: Add description.`
+- Always review auto-fixed files for accuracy
 
 ## Examples
 

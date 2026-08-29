@@ -1,3 +1,12 @@
+---
+title: Security
+description: Baseline security practices for any backend.
+tags:
+  - backend
+  - security
+status: Draft
+---
+
 # Security
 
 Baseline security practices for any backend.

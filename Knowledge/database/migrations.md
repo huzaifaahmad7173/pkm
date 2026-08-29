@@ -1,3 +1,12 @@
+---
+title: Database Migrations
+description: Migrations keep database schema synchronized with application code.
+tags:
+  - database
+  - migrations
+status: Draft
+---
+
 # Database Migrations
 
 Migrations keep database schema synchronized with application code.

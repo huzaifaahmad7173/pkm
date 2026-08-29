@@ -1,3 +1,12 @@
+---
+title: Service Patterns
+description: Generic backend architecture: how requests flow and where logic lives.
+tags:
+  - backend
+  - service-patterns
+status: Draft
+---
+
 # Service Patterns
 
 Generic backend architecture: how requests flow and where logic lives.

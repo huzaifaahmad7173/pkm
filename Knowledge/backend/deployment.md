@@ -1,3 +1,12 @@
+---
+title: Deployment
+description: How the backend gets built, released, and monitored.
+tags:
+  - backend
+  - deployment
+status: Draft
+---
+
 # Deployment
 
 How the backend gets built, released, and monitored.

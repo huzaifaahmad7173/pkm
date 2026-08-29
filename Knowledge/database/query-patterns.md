@@ -1,3 +1,12 @@
+---
+title: Query Patterns
+description: Writing efficient queries improves performance and scalability.
+tags:
+  - database
+  - query-patterns
+status: Draft
+---
+
 # Query Patterns
 
 Writing efficient queries improves performance and scalability.

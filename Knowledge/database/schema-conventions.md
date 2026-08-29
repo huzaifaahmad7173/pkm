@@ -1,3 +1,12 @@
+---
+title: Schema Conventions
+description: Database schema should be predictable and consistent.
+tags:
+  - database
+  - schema-conventions
+status: Draft
+---
+
 # Schema Conventions
 
 Database schema should be predictable and consistent.

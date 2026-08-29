@@ -91,13 +91,64 @@ category: database                 # Unexpected field
 ---
 ```
 
+## Auto-Fix
+
+The validation script can automatically fix missing frontmatter. After running validation, if invalid files are found, the script asks:
+
+```
+Found N invalid file(s). Would you like to fix them? [y/N]
+```
+
+If you choose `y`, it shows a numbered list and asks which files to fix:
+
+```
+Enter file numbers to fix (comma-separated) or 'all':
+```
+
+### What Auto-Fix Does
+
+| Scenario | Fix |
+|----------|-----|
+| No frontmatter block | Inserts frontmatter derived from file content |
+| Frontmatter inside `` ``` `` markers | Strips the code block markers |
+| Missing `description` | Extracts from first paragraph after H1 heading |
+| Missing `tags` | Generates from domain folder + filename |
+| Missing `status` | Defaults to `Draft` |
+
+### How Content Is Extracted
+
+**Title** — from the first `# Heading` in the file:
+```markdown
+# Deployment
+```
+→ `title: Deployment`
+
+**Description** — first non-empty, non-heading line after the H1:
+```markdown
+# Deployment
+
+How the backend gets built, released, and monitored.
+```
+→ `description: How the backend gets built, released, and monitored.`
+
+**Tags** — from folder name + filename:
+- File: `Knowledge/backend/deployment.md`
+- → `tags: [backend, deployment]`
+
+### Limitations
+
+- Cannot fix invalid values (e.g., wrong Title Case, missing period on description)
+- Files with no H1 heading get `title: TODO: Add Title`
+- Files with no description paragraph get `description: TODO: Add description.`
+- Always review auto-fixed files for accuracy
+
 ## Scope & Validation
 
 **Applies to:** All `*.md` files in `Knowledge/`, excluding `AGENTS.md`, `.opencode/`, and `Templates/`.
 
 **Validate by running:**
 ```bash
-python3 .opencode/skill/frontmatter-validation/scripts/validate_frontmatter.py
+python3 .opencode/skills/frontmatter-validation/scripts/validate_frontmatter.py
 ```
 
-Output: `VALID` or `INVALID` with numbered findings per file.
+Output: `VALID` or `INVALID` with numbered findings per file. If invalid files exist, the script prompts to fix them.
