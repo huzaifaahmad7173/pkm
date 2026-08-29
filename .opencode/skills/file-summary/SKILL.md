@@ -20,6 +20,16 @@ Generates a detailed analysis of a Knowledge base Markdown file.
 - Domain `AGENTS.md` files — these are config, not content docs.
 - User asks to edit, validate, or commit a file (use other skills/tools).
 
+## Schema
+
+Reference: `schema.yaml` in this skill directory.
+
+The schema defines the output structure for file summaries, including required sections, field sources, and fallback values. Read the YAML file for the full field definitions. The schema defines:
+
+- **Output sections:** `summary`, `structure`, `key_concepts` (required); `related_files` (optional)
+- **Field sources:** frontmatter, file path, or content scan
+- **Fallback values:** Used when frontmatter fields are missing
+
 ## Procedure
 
 1. **Locate the file.** Confirm the target file exists under `Knowledge/`. If the user provides a relative path, resolve it against the repo root. If the file does not exist, report the error and stop.

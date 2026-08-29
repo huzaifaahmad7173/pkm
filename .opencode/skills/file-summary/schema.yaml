@@ -1,0 +1,58 @@
+scope:
+  directories:
+    - Knowledge/
+  file_pattern: "*.md"
+  exclude:
+    - "*/AGENTS.md"
+
+output_sections:
+  required:
+    - summary
+    - structure
+    - key_concepts
+  optional:
+    - related_files
+
+fields:
+  title:
+    type: string
+    source: frontmatter.title
+    fallback: first_h1_heading
+
+  description:
+    type: string
+    source: frontmatter.description
+    fallback: first_paragraph_after_h1
+
+  domain:
+    type: string
+    source: file_path
+    extraction: parent_directory_of_Knowledge
+
+  status:
+    type: string
+    source: frontmatter.status
+    default: "—"
+
+  tags:
+    type: list
+    source: frontmatter.tags
+    default: []
+
+  headings:
+    type: list
+    source: content_scan
+    levels: [h1, h2, h3]
+
+  related_files:
+    type: list
+    source: frontmatter.related
+    default: []
+
+  word_count:
+    type: integer
+    source: content_scan
+
+  line_count:
+    type: integer
+    source: content_scan
