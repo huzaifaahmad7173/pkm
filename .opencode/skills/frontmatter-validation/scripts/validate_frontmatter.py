@@ -1,10 +1,14 @@
 
-
 import re
 import sys
 from pathlib import Path
 
-import yaml
+try:
+    import yaml
+except ImportError:
+    print("Missing dependency: pyyaml")
+    print("Install with: pip install -r requirements.txt")
+    sys.exit(1)
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
 SCHEMA_PATH = Path(__file__).resolve().parent.parent / "schema.yaml"
