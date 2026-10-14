@@ -24,3 +24,4 @@ Verification of existing `Knowledge/` docs runs through the **audit mode** in `.
 - `@kb-tech-lead` — technical review (feasibility, correctness, risk).
 - `@kb-architect` — architectural review (decomposition, scope, system fit).
 - `@general-task` — the writing agent; does all drafting and revision.
+- `@git-change-reviewer` — report-only git change review (correctness, security) with commit message suggestions via the `git-commit-assistant` skill.

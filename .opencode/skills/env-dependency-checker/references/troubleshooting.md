@@ -1,6 +1,6 @@
 # Troubleshooting Dependency Checks
 
-Fixes for each failure type reported by `check_deps.py`.
+Fixes for each failure type reported by this skill.
 
 ## Python Packages
 
